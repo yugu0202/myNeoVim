@@ -1,0 +1,24 @@
+[Editor]
+## Launch goneovim with maximized window size.
+StartMaximizedWindow = true
+## Enable the ability to remember the last window geometry that was displayed
+## and restore it at the next startup.
+RestoreWindowGeometry = true
+## Controls whether mouse events in Neovim are ignored when
+## an application window is clicked while the application window is inactive.
+IgnoreFirstMouseClickWhenAppInactivated = true
+
+FontFamily = "Hack Nerd Font"
+## Specifies whether the last exited session should be restored at the next startup.
+RestoreSession = true
+[MiniMap]
+## To view the minimap, launch an additional nvim instance;
+## setting Disable to true will not launch this additional nvim instance
+## and will completely disable the minimap feature.
+Disable = true
+
+## Specifies whether to show the minimap or not.
+Visible = true
+
+## Specifies the width of the minimap.
+Width = 200
