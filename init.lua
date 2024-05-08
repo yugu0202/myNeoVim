@@ -24,7 +24,7 @@ require('jetpack.packer').add {
 			}
 		end
 	},
-	'lukas-reineke/indent-blankline.nvim',
+	{'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}},
 	'onsails/lspkind.nvim',
 	'neovim/nvim-lspconfig',
 	'williamboman/mason.nvim',
@@ -43,13 +43,17 @@ require('jetpack.packer').add {
 	'yutkat/cmp-mocword',
 	'ray-x/cmp-treesitter',
 	{'nvim-telescope/telescope.nvim',
-	tag = '0.1.0'
+	tag = '0.1.6'
 	},
 	'nvim-telescope/telescope-frecency.nvim',
-	'sidebar-nvim/sidebar.nvim',
 	'voldikss/vim-floaterm',
 	'windwp/nvim-autopairs',
 }
+
+vim.o.termguicolors = true
+vim.o.shell = 'powershell.exe'
+vim.o.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
+vim.o.shellxquote = ''
 
 vim.api.nvim_set_var('fern#renderer','nerdfont')
 vim.api.nvim_set_var('sqlite_clib_path','C://Data/sqlite/sqlite3.dll')
@@ -80,10 +84,7 @@ require('lualine').setup{
 
 require('bufferline').setup{}
 
-require('indent_blankline').setup{
-	show_current_context = true,
-	show_current_context_start = true,
-}
+require("ibl").setup{}
 
 -- normal mode buffer cycle
 vim.api.nvim_set_keymap('n', '<TAB>',  '<cmd>BufferLineCycleNext<CR>', {})
@@ -94,24 +95,6 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 
 vim.o.updatetime = 300
-
-require('sidebar-nvim').setup({
-	sections = { 'datetime', 'git', 'diagnostics', 'containers', 'files', 'symbols' },
-	symbols = { icon = 'ƒ' },
-	containers = {
-		icon = '',
-		use_podman = false,
-		attach_shell = '/bin/bash',
-		show_all = true,
-		interval = 5000,
-	},
-	files = {
-		icon = '',
-		show_hidden = true,
-		ignore_paths = {'%.git$'}
-	},
-})
-
 
 -- LSP server management
 require('mason').setup{}
