@@ -35,7 +35,7 @@ map('t', '<leader>ft', '<cmd>FloatermToggle<CR>', { silent = true, desc = 'タ�
 -- Git hunk（Gitsigns）
 map('n', ']h', '<cmd>Gitsigns next_hunk<CR>', { silent = true, desc = '次の変更へ' })
 map('n', '[h', '<cmd>Gitsigns prev_hunk<CR>', { silent = true, desc = '前の変更へ' })
-map('n', '<leader>ghp', '<cmd>Gitsigns preview_hunk_inline<CR>', { silent = true, desc = '変更をプレビュー' })
+map('n', '<leader>ghp', '<cmd>Gitsigns preview_hunk<CR>', { silent = true, desc = '変更をプレビュー' })
 map('n', '<leader>ghs', '<cmd>Gitsigns stage_hunk<CR>', { silent = true, desc = 'ハンクをステージ' })
 map('n', '<leader>ghr', '<cmd>Gitsigns reset_hunk<CR>', { silent = true, desc = 'ハンクをリセット' })
 map('n', '<leader>ghb', '<cmd>Gitsigns blame_line<CR>', { silent = true, desc = '行の blame' })
