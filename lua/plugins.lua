@@ -114,6 +114,26 @@ require('lazy').setup({
 		end,
 	},
 	{
+		'lewis6991/gitsigns.nvim',
+		event = 'BufReadPost',
+		config = function()
+			require('config.git')
+		end,
+	},
+	{
+		'sindrets/diffview.nvim',
+		cmd = {
+			'DiffviewOpen',
+			'DiffviewClose',
+			'DiffviewFileHistory',
+			'DiffviewFocusFiles',
+			'DiffviewToggleFiles',
+		},
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+		},
+	},
+	{
 		'voldikss/vim-floaterm',
 		cmd = 'FloatermToggle',
 	},
