@@ -24,7 +24,11 @@ require('jetpack.packer').add {
 			}
 		end
 	},
-	{'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}},
+	{'lukas-reineke/indent-blankline.nvim',
+		config = function()
+			require("ibl").setup{}
+		end
+	},
 	'onsails/lspkind.nvim',
 	'neovim/nvim-lspconfig',
 	'williamboman/mason.nvim',
@@ -35,19 +39,26 @@ require('jetpack.packer').add {
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp-signature-help',
-	'hrsh7th/cmp-nvim-lsp-document-symbol',
 	'hrsh7th/cmp-nvim-lua',
 	'hrsh7th/cmp-emoji',
 	'hrsh7th/cmp-calc',
 	'f3fora/cmp-spell',
 	'yutkat/cmp-mocword',
 	'ray-x/cmp-treesitter',
+	'github/copilot.vim',
 	{'nvim-telescope/telescope.nvim',
 	tag = '0.1.6'
 	},
 	'nvim-telescope/telescope-frecency.nvim',
 	'voldikss/vim-floaterm',
 	'windwp/nvim-autopairs',
+	{'folke/which-key.nvim',
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require('which-key').setup{}
+		end
+	},
 }
 
 vim.o.termguicolors = true
@@ -84,8 +95,6 @@ require('lualine').setup{
 
 require('bufferline').setup{}
 
-require("ibl").setup{}
-
 -- normal mode buffer cycle
 vim.api.nvim_set_keymap('n', '<TAB>',  '<cmd>BufferLineCycleNext<CR>', {})
 vim.api.nvim_set_keymap('n', '<S-TAB>',  '<cmd>BufferLineCyclePrev<CR>', {})
@@ -98,25 +107,17 @@ vim.o.updatetime = 300
 
 -- LSP server management
 require('mason').setup{}
-require('mason-lspconfig').setup_handlers({ function(server)
-	local opt = {
-	-- Function executed when the LSP server startup
-    -- on_attach = function(client, bufnr)
-    -- local opts = { noremap=true, silent=true }
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    -- vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
-    -- end,
-    capabilities = require('cmp_nvim_lsp').default_capabilities(
-      vim.lsp.protocol.make_client_capabilities()
-    )
-  }
-  require('lspconfig')[server].setup(opt)
-end })
+vim.lsp.config('*', {
+	capabilities = require('cmp_nvim_lsp').default_capabilities(
+		vim.lsp.protocol.make_client_capabilities()
+	)
+})
+require('mason-lspconfig').setup({})
 
 -- 2. build-in LSP function
 -- keyboard shortcut
 vim.api.nvim_set_keymap('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>',{})
-vim.api.nvim_set_keymap('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>',{})
+vim.api.nvim_set_keymap('n', 'gf', '<cmd>lua vim.lsp.buf.format()<CR>',{})
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>',{})
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>',{})
 vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>',{})
@@ -128,20 +129,13 @@ vim.api.nvim_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>',{}
 vim.api.nvim_set_keymap('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>',{})
 vim.api.nvim_set_keymap('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>',{})
 -- LSP handlers
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
-)
-
-local function on_cursor_hold()
-  if vim.lsp.buf.server_ready() then
-    vim.diagnostic.open_float()
-  end
-end
+vim.diagnostic.config({
+	virtual_text = false
+})
 
 local diagnostic_hover_augroup_name = "lspconfig-diagnostic"
 vim.api.nvim_set_option('updatetime', 500)
 vim.api.nvim_create_augroup(diagnostic_hover_augroup_name, { clear = true })
-vim.api.nvim_create_autocmd({ "CursorHold" }, { group = diagnostic_hover_augroup_name, callback = on_cursor_hold })
 
 require('fidget').setup{}
 
@@ -183,7 +177,6 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
-		{ name = 'nvim_lsp_document_symbol' },
 		-- { name = 'vsnip' }, -- For vsnip users.
 		-- { name = 'luasnip' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
