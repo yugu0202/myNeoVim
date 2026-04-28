@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 
+map('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true, desc = '検索ハイライトを消す' })
+
 map('n', '==', '<cmd>Oil --float<CR>', { silent = true, desc = 'ファイルツリーを開く' })
 
 map('n', '<Tab>', '<cmd>bnext<CR>', { silent = true, desc = '次のバッファ' })
