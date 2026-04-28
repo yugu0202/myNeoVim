@@ -3,8 +3,8 @@ local opts = { silent = true }
 
 map('n', '==', '<cmd>Oil --float<CR>', opts)
 
-map('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', opts)
-map('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', opts)
+map('n', '<Tab>', '<cmd>bnext<CR>', opts)
+map('n', '<S-Tab>', '<cmd>bprevious<CR>', opts)
 
 map('n', 'K', vim.lsp.buf.hover, opts)
 map('n', 'gf', vim.lsp.buf.format, opts)
