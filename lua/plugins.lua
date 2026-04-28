@@ -63,11 +63,10 @@ require('lazy').setup({
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
-		event = 'BufReadPost',
+		build = ':TSUpdate',
+		lazy = false,
 		config = function()
-			require('nvim-treesitter.configs').setup({
-				highlight = { enable = false },
-			})
+			require('nvim-treesitter').setup({})
 		end,
 	},
 	{
