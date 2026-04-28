@@ -1,9 +1,15 @@
 local opt = vim.opt
+local shell = vim.fn.exepath('pwsh')
+
+if shell == '' then
+	shell = 'powershell.exe'
+end
 
 opt.termguicolors = true
-opt.shell = 'powershell.exe'
-opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
+opt.shell = shell
+opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
 opt.shellxquote = ''
+vim.g.floaterm_shell = shell
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.updatetime = 500
