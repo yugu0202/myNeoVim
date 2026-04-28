@@ -1,4 +1,3 @@
-local builtin = require('telescope.builtin')
 local map = vim.keymap.set
 local opts = { silent = true }
 
@@ -20,13 +19,11 @@ map('n', 'ge', vim.diagnostic.open_float, opts)
 map('n', 'g]', vim.diagnostic.goto_next, opts)
 map('n', 'g[', vim.diagnostic.goto_prev, opts)
 
-map('n', '<leader>ff', builtin.git_files, opts)
-map('n', '<leader>fg', builtin.live_grep, opts)
-map('n', '<leader>fb', builtin.buffers, opts)
-map('n', '<leader>fh', builtin.help_tags, opts)
-map('n', '<leader>fy', function()
-	require('telescope').extensions.frecency.frecency()
-end, opts)
+map('n', '<leader>ff', '<cmd>Telescope git_files<CR>', opts)
+map('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', opts)
+map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', opts)
+map('n', '<leader>fh', '<cmd>Telescope help_tags<CR>', opts)
+map('n', '<leader>fy', '<cmd>Telescope frecency<CR>', opts)
 
 map('n', '<leader>ft', '<cmd>FloatermToggle<CR>', opts)
 map('t', '<leader>ft', '<cmd>FloatermToggle<CR>', opts)
