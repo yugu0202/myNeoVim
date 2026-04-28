@@ -16,5 +16,6 @@ opt.updatetime = 500
 opt.timeout = true
 opt.timeoutlen = 300
 opt.number = true
+opt.autoread = true
 
 vim.g.sqlite_clib_path = 'C://Data/sqlite/sqlite3.dll'

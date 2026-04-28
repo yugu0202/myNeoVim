@@ -22,5 +22,6 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require('core.options')
+require('core.autocmds')
 require('plugins')
 require('core.keymaps')
