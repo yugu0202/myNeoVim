@@ -231,7 +231,7 @@ function M.preview_hunk_inline_wrapped()
 	-- ウィンドウ幅の計算（サインカラム等を除く）
 	local win_width = api.nvim_win_get_width(0)
 	local text_off = vim.fn.getwininfo(vim.fn.win_getid())[1].textoff
-	local max_width = win_width - text_off - 3 -- "- " の2文字 + 余白
+	local max_width = win_width - text_off - 3 -- プレフィックス "- " / "+ " の2文字 + 余白
 
 	local removed_lines = hunk.removed.lines or {}
 	local added_lines = hunk.added.lines or {}
@@ -242,14 +242,19 @@ function M.preview_hunk_inline_wrapped()
 		word_diff = calc_word_diff(removed_lines, added_lines)
 	end
 
-	-- 各削除行を折り返す
+	-- 削除行を折り返す
 	local wrapped_removed = {}
 	for i, line in ipairs(removed_lines) do
-		local wrapped = wrap_line(line, max_width)
-		wrapped_removed[i] = wrapped
+		wrapped_removed[i] = wrap_line(line, max_width)
 	end
 
-	-- フラットな削除行リストを構築
+	-- 追加行を折り返す
+	local wrapped_added = {}
+	for i, line in ipairs(added_lines) do
+		wrapped_added[i] = wrap_line(line, max_width)
+	end
+
+	-- フラットリストに展開
 	local all_removed_lines = {}
 	for _, wrapped in ipairs(wrapped_removed) do
 		for _, wl in ipairs(wrapped) do
@@ -257,17 +262,27 @@ function M.preview_hunk_inline_wrapped()
 		end
 	end
 
-	-- word diff のリージョンをリマップ
-	local removed_regions = {}
-	if word_diff then
-		for _, region in ipairs(word_diff.removed) do
-			local remapped = remap_region(region, wrapped_removed, nil)
-			vim.list_extend(removed_regions, remapped)
+	local all_added_lines = {}
+	for _, wrapped in ipairs(wrapped_added) do
+		for _, wl in ipairs(wrapped) do
+			table.insert(all_added_lines, wl)
 		end
 	end
 
-	-- virt_lines 構築
-	local virt_lines = build_virt_lines(
+	-- word diff のリージョンをリマップ
+	local removed_regions = {}
+	local added_regions = {}
+	if word_diff then
+		for _, region in ipairs(word_diff.removed) do
+			vim.list_extend(removed_regions, remap_region(region, wrapped_removed, nil))
+		end
+		for _, region in ipairs(word_diff.added) do
+			vim.list_extend(added_regions, remap_region(region, wrapped_added, nil))
+		end
+	end
+
+	-- 削除行（赤 "-"）の virt_lines
+	local del_virt = build_virt_lines(
 		all_removed_lines,
 		removed_regions,
 		'GitSignsDeleteVirtLn',
@@ -275,15 +290,28 @@ function M.preview_hunk_inline_wrapped()
 		'- '
 	)
 
+	-- 追加行（緑 "+"）の virt_lines
+	local add_virt = build_virt_lines(
+		all_added_lines,
+		added_regions,
+		'GitSignsAddPreview',
+		'GitSignsAddInline',
+		'+ '
+	)
+
+	-- 削除行 → 追加行の順に結合
+	local virt_lines = {}
+	vim.list_extend(virt_lines, del_virt)
+	vim.list_extend(virt_lines, add_virt)
+
 	if #virt_lines == 0 then
-		vim.notify('表示する削除行がありません', vim.log.levels.INFO)
+		vim.notify('表示するハンクがありません', vim.log.levels.INFO)
 		return
 	end
 
 	-- ハンク先頭行の上に配置（0-based）
 	local row = hunk.added.start - 1
 	if hunk.added.count == 0 then
-		-- pure delete: 削除行の直後
 		row = hunk.removed.start
 	end
 
