@@ -149,6 +149,7 @@ require('lazy').setup({
 		event = 'VimEnter',
 		config = function()
 			require('which-key').setup({})
+			require('config.which_key')
 		end,
 	},
 }, {
