@@ -121,16 +121,18 @@ require('lazy').setup({
 		end,
 	},
 	{
-		'sindrets/diffview.nvim',
-		cmd = {
-			'DiffviewOpen',
-			'DiffviewClose',
-			'DiffviewFileHistory',
-			'DiffviewFocusFiles',
-			'DiffviewToggleFiles',
-		},
-		dependencies = {
-			'nvim-lua/plenary.nvim',
+		'esmuellert/codediff.nvim',
+		cmd = 'CodeDiff',
+		opts = {
+			diff = {
+				layout = 'side-by-side',
+				jump_to_first_change = true,
+				cycle_next_hunk = true,
+			},
+			explorer = {
+				position = 'left',
+				width = 35,
+			},
 		},
 	},
 	{

@@ -37,9 +37,8 @@ map('n', '<leader>ghs', '<cmd>Gitsigns stage_hunk<CR>', { silent = true, desc = 
 map('n', '<leader>ghr', '<cmd>Gitsigns reset_hunk<CR>', { silent = true, desc = 'ハンクをリセット' })
 map('n', '<leader>ghb', '<cmd>Gitsigns blame_line<CR>', { silent = true, desc = '行の blame' })
 
--- Git（Diffview）
-map('n', '<leader>gd', '<cmd>DiffviewOpen<CR>', { silent = true, desc = 'Diffview を開く' })
-map('n', '<leader>gD', '<cmd>DiffviewOpen HEAD~1<CR>', { silent = true, desc = '直前のコミットと比較' })
-map('n', '<leader>gq', '<cmd>DiffviewClose<CR>', { silent = true, desc = 'Diffview を閉じる' })
-map('n', '<leader>gf', '<cmd>DiffviewFileHistory %<CR>', { silent = true, desc = 'ファイル履歴' })
-map('n', '<leader>gF', '<cmd>DiffviewFileHistory<CR>', { silent = true, desc = 'リポジトリ全体の履歴' })
+-- Git（CodeDiff）
+map('n', '<leader>gd', '<cmd>CodeDiff<CR>',         { silent = true, desc = 'CodeDiff を開く（作業ツリー）' })
+map('n', '<leader>gD', '<cmd>CodeDiff HEAD~1<CR>',  { silent = true, desc = '直前のコミットと比較' })
+map('n', '<leader>gf', '<cmd>CodeDiff history %<CR>', { silent = true, desc = 'ファイル履歴' })
+map('n', '<leader>gF', '<cmd>CodeDiff history<CR>',  { silent = true, desc = 'リポジトリ全体の履歴' })
