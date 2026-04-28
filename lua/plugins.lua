@@ -98,8 +98,21 @@ require('lazy').setup({
 		end,
 	},
 	{
-		'github/copilot.vim',
+		'zbirenbaum/copilot.lua',
 		event = 'InsertEnter',
+		config = function()
+			require('copilot').setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	},
+	{
+		'zbirenbaum/copilot-cmp',
+		dependencies = { 'zbirenbaum/copilot.lua' },
+		config = function()
+			require('copilot_cmp').setup()
+		end,
 	},
 	{
 		'nvim-telescope/telescope.nvim',
