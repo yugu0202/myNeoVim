@@ -28,6 +28,7 @@ map('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', { silent = true, desc = '
 map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { silent = true, desc = 'バッファ一覧' })
 map('n', '<leader>fh', '<cmd>Telescope help_tags<CR>', { silent = true, desc = 'ヘルプ検索' })
 map('n', '<leader>fy', '<cmd>Telescope frecency<CR>', { silent = true, desc = '最近のファイル' })
+map('n', '<leader>fs', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', { silent = true, desc = 'シンボル検索' })
 map('n', '<leader>ft', '<cmd>FloatermToggle<CR>', { silent = true, desc = 'ターミナル' })
 map('t', '<leader>ft', '<cmd>FloatermToggle<CR>', { silent = true, desc = 'ターミナルを閉じる' })
 
