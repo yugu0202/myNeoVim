@@ -1,0 +1,32 @@
+local builtin = require('telescope.builtin')
+local map = vim.keymap.set
+local opts = { silent = true }
+
+map('n', '==', '<cmd>Oil --float<CR>', opts)
+
+map('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', opts)
+map('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', opts)
+
+map('n', 'K', vim.lsp.buf.hover, opts)
+map('n', 'gf', vim.lsp.buf.format, opts)
+map('n', 'gr', vim.lsp.buf.references, opts)
+map('n', 'gd', vim.lsp.buf.definition, opts)
+map('n', 'gD', vim.lsp.buf.declaration, opts)
+map('n', 'gi', vim.lsp.buf.implementation, opts)
+map('n', 'gt', vim.lsp.buf.type_definition, opts)
+map('n', 'gn', vim.lsp.buf.rename, opts)
+map('n', 'ga', vim.lsp.buf.code_action, opts)
+map('n', 'ge', vim.diagnostic.open_float, opts)
+map('n', 'g]', vim.diagnostic.goto_next, opts)
+map('n', 'g[', vim.diagnostic.goto_prev, opts)
+
+map('n', '<leader>ff', builtin.git_files, opts)
+map('n', '<leader>fg', builtin.live_grep, opts)
+map('n', '<leader>fb', builtin.buffers, opts)
+map('n', '<leader>fh', builtin.help_tags, opts)
+map('n', '<leader>fy', function()
+	require('telescope').extensions.frecency.frecency()
+end, opts)
+
+map('n', '<leader>ft', '<cmd>FloatermToggle<CR>', opts)
+map('t', '<leader>ft', '<cmd>FloatermToggle<CR>', opts)
