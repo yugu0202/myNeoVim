@@ -20,6 +20,7 @@ map('n', 'g]', vim.diagnostic.goto_next, opts)
 map('n', 'g[', vim.diagnostic.goto_prev, opts)
 
 map('n', '<leader>ff', '<cmd>Telescope git_files<CR>', opts)
+map('n', '<leader>fF', '<cmd>Telescope find_files<CR>', opts)
 map('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', opts)
 map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', opts)
 map('n', '<leader>fh', '<cmd>Telescope help_tags<CR>', opts)
