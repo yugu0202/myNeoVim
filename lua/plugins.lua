@@ -80,8 +80,8 @@ require('lazy').setup({
 	{
 		'neovim/nvim-lspconfig',
 		dependencies = {
-			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
+			'mason-org/mason.nvim',
+			'mason-org/mason-lspconfig.nvim',
 		},
 		config = function()
 			require('config.lsp')
@@ -96,17 +96,6 @@ require('lazy').setup({
 		},
 		config = function()
 			require('config.blink')
-		end,
-	},
-	{
-		'zbirenbaum/copilot.lua',
-		cmd = 'Copilot',
-		event = 'InsertEnter',
-		config = function()
-			require('copilot').setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-			})
 		end,
 	},
 	{
