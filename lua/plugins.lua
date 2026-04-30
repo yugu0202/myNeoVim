@@ -30,6 +30,17 @@ require('lazy').setup({
 		end,
 	},
 	{
+		'TaDaa/vimade',
+		event = 'VimEnter',
+		config = function()
+			require('vimade').setup({
+				recipe = { 'default', { animate = true } },
+				ncmode = 'windows',
+				fadelevel = 0.4,
+			})
+		end,
+	},
+	{
 		'nvim-lualine/lualine.nvim',
 		event = 'VimEnter',
 		dependencies = {
