@@ -114,28 +114,18 @@ require('lazy').setup({
 		event = 'InsertEnter',
 		dependencies = {
 			'copilotlsp-nvim/copilot-lsp',
+			'zbirenbaum/copilot-cmp',
 		},
 		config = function()
 			require('copilot').setup({
-				suggestion = {
-					enabled = true,
-					auto_trigger = true,
-					hide_during_completion = true,
-					keymap = {
-						accept = '<M-l>',
-						accept_word = false,
-						accept_line = false,
-						next = '<M-]>',
-						prev = '<M-[>',
-						dismiss = '<C-]>',
-					},
-				},
+				suggestion = { enabled = false },
 				panel = { enabled = false },
 				nes = {
 					enabled = true,
 					auto_trigger = false,
 				},
 			})
+			require('copilot_cmp').setup()
 		end,
 	},
 	{
