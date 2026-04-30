@@ -6,6 +6,8 @@ require('blink.cmp').setup({
 		['<CR>'] = { 'accept', 'fallback' },
 		['<C-e>'] = { 'hide' },
 		['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+		['<C-n>'] = { 'select_next', 'fallback' },
+		['<C-p>'] = { 'select_prev', 'fallback' },
 	},
 	sources = {
 		default = { 'copilot', 'lsp', 'buffer', 'path' },
