@@ -102,22 +102,12 @@ require('lazy').setup({
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
 		event = 'InsertEnter',
-		dependencies = {
-			'copilotlsp-nvim/copilot-lsp',
-		},
 		config = function()
 			require('copilot').setup({
 				suggestion = { enabled = false },
 				panel = { enabled = false },
-				nes = {
-					enabled = false,
-				},
 			})
 		end,
-	},
-	{
-		'copilotlsp-nvim/copilot-lsp',
-		lazy = true,
 	},
 	{
 		'nvim-telescope/telescope.nvim',
