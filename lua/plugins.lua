@@ -99,20 +99,37 @@ require('lazy').setup({
 	},
 	{
 		'zbirenbaum/copilot.lua',
+		cmd = 'Copilot',
 		event = 'InsertEnter',
+		dependencies = {
+			'copilotlsp-nvim/copilot-lsp',
+		},
 		config = function()
 			require('copilot').setup({
-				suggestion = { enabled = false },
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					hide_during_completion = true,
+					keymap = {
+						accept = '<M-l>',
+						accept_word = false,
+						accept_line = false,
+						next = '<M-]>',
+						prev = '<M-[>',
+						dismiss = '<C-]>',
+					},
+				},
 				panel = { enabled = false },
+				nes = {
+					enabled = true,
+					auto_trigger = false,
+				},
 			})
 		end,
 	},
 	{
-		'zbirenbaum/copilot-cmp',
-		dependencies = { 'zbirenbaum/copilot.lua' },
-		config = function()
-			require('copilot_cmp').setup()
-		end,
+		'copilotlsp-nvim/copilot-lsp',
+		lazy = true,
 	},
 	{
 		'nvim-telescope/telescope.nvim',

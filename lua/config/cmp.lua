@@ -25,7 +25,6 @@ cmp.setup({
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 	}),
 	sources = cmp.config.sources({
-		{ name = 'copilot' },
 		{ name = 'nvim_lsp' },
 	}, {
 		{ name = 'buffer' },
@@ -62,24 +61,11 @@ cmp.setup({
 	},
 })
 
-cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources({}, {
-		{ name = 'buffer' },
-	}),
-})
+-- Hide copilot suggestion when cmp menu is open
+cmp.event:on('menu_opened', function()
+	vim.b.copilot_suggestion_hidden = true
+end)
 
-cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = 'buffer' },
-	},
-})
-
-cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'path' },
-	}, {
-		{ name = 'cmdline' },
-	}),
-})
+cmp.event:on('menu_closed', function()
+	vim.b.copilot_suggestion_hidden = false
+end)
