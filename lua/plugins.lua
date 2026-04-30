@@ -110,8 +110,7 @@ require('lazy').setup({
 				suggestion = { enabled = false },
 				panel = { enabled = false },
 				nes = {
-					enabled = true,
-					auto_trigger = false,
+					enabled = false,
 				},
 			})
 		end,
