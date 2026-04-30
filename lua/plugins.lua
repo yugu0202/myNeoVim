@@ -82,30 +82,20 @@ require('lazy').setup({
 		dependencies = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
-			'hrsh7th/cmp-nvim-lsp',
 		},
 		config = function()
 			require('config.lsp')
 		end,
 	},
 	{
-		'hrsh7th/nvim-cmp',
+		'saghen/blink.cmp',
+		version = '*',
+		event = { 'InsertEnter', 'CmdlineEnter' },
 		dependencies = {
-			'onsails/lspkind.nvim',
-			'hrsh7th/cmp-buffer',
-			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-cmdline',
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-nvim-lsp-signature-help',
-			'hrsh7th/cmp-nvim-lua',
-			'hrsh7th/cmp-emoji',
-			'hrsh7th/cmp-calc',
-			'f3fora/cmp-spell',
-			'yutkat/cmp-mocword',
-			'ray-x/cmp-treesitter',
+			'fang2hou/blink-copilot',
 		},
 		config = function()
-			require('config.cmp')
+			require('config.blink')
 		end,
 	},
 	{
@@ -114,7 +104,6 @@ require('lazy').setup({
 		event = 'InsertEnter',
 		dependencies = {
 			'copilotlsp-nvim/copilot-lsp',
-			'zbirenbaum/copilot-cmp',
 		},
 		config = function()
 			require('copilot').setup({
@@ -125,7 +114,6 @@ require('lazy').setup({
 					auto_trigger = false,
 				},
 			})
-			require('copilot_cmp').setup()
 		end,
 	},
 	{
