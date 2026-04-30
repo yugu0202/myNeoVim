@@ -142,17 +142,6 @@ require('lazy').setup({
 				width = 35,
 			},
 		},
-		config = function(_, opts)
-			require('codediff').setup(opts)
-			vim.api.nvim_create_autocmd('User', {
-				pattern = 'CodeDiffOpen',
-				callback = function()
-					for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-						vim.wo[win].wrap = true
-					end
-				end,
-			})
-		end,
 	},
 	{
 		'voldikss/vim-floaterm',
