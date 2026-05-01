@@ -15,10 +15,10 @@ _G.paste_over_op = function(type)
   vim.cmd('normal! P')
 end
 
-map('n', 'cp', function()
+map('n', 's', function()
   vim.go.operatorfunc = 'v:lua.paste_over_op'
   return 'g@'
-end, { expr = true, desc = 'テキストオブジェクトの中身を上書きペースト (cp{motion})' })
+end, { expr = true, desc = 'テキストオブジェクトの中身を上書きペースト (s{motion})' })
 
 map('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true, desc = '検索ハイライトを消す' })
 
