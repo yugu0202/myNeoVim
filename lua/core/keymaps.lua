@@ -1,5 +1,25 @@
 local map = vim.keymap.set
 
+-- テキストオブジェクトにペーストする operator（cp{motion} で使用）
+_G.paste_over_op = function(type)
+  local reg = vim.fn.getreg('"')
+  local regtype = vim.fn.getregtype('"')
+  if type == 'char' then
+    vim.cmd('normal! `[v`]"_d')
+  elseif type == 'line' then
+    vim.cmd('normal! `[V`]"_d')
+  elseif type == 'block' then
+    vim.cmd('normal! `[\22`]"_d')
+  end
+  vim.fn.setreg('"', reg, regtype)
+  vim.cmd('normal! P')
+end
+
+map('n', 'cp', function()
+  vim.go.operatorfunc = 'v:lua.paste_over_op'
+  return 'g@'
+end, { expr = true, desc = 'テキストオブジェクトにペースト (cp{motion})' })
+
 map('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true, desc = '検索ハイライトを消す' })
 
 map('n', '==', '<cmd>Oil --float<CR>', { silent = true, desc = 'ファイルツリーを開く' })
