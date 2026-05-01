@@ -133,6 +133,13 @@ require('lazy').setup({
 		},
 	},
 	{
+		'rmagatti/auto-session',
+		lazy = false,
+		config = function()
+			require('config.session')
+		end,
+	},
+	{
 		'voldikss/vim-floaterm',
 		cmd = 'FloatermToggle',
 	},

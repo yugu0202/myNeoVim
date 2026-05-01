@@ -18,4 +18,5 @@ opt.timeoutlen = 300
 opt.number = true
 opt.autoread = true
 
-vim.g.sqlite_clib_path = 'C://Data/sqlite/sqlite3.dll'
+opt.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+

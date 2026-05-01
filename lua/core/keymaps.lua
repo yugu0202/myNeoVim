@@ -52,7 +52,11 @@ map('n', '<leader>fs', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', { sil
 map('n', '<leader>ft', '<cmd>FloatermToggle<CR>', { silent = true, desc = 'ターミナル' })
 map('t', '<leader>ft', '<cmd>FloatermToggle<CR>', { silent = true, desc = 'ターミナルを閉じる' })
 
--- Git hunk（Gitsigns）
+-- Session（auto-session）
+map('n', '<leader>ss', '<cmd>AutoSession search<CR>', { silent = true, desc = 'セッション一覧を開く' })
+map('n', '<leader>sw', '<cmd>AutoSession save<CR>', { silent = true, desc = 'セッションを保存' })
+map('n', '<leader>sr', '<cmd>AutoSession restore<CR>', { silent = true, desc = 'セッションを復元' })
+
 map('n', ']h', '<cmd>Gitsigns next_hunk<CR>', { silent = true, desc = '次の変更へ' })
 map('n', '[h', '<cmd>Gitsigns prev_hunk<CR>', { silent = true, desc = '前の変更へ' })
 map('n', '<leader>ghp', '<cmd>Gitsigns preview_hunk<CR>', { silent = true, desc = '変更をプレビュー' })

@@ -5,6 +5,7 @@ wk.add({
 	{ '<leader>f', group = 'Find / File' },
 	{ '<leader>g', group = 'Git' },
 	{ '<leader>gh', group = 'Hunk' },
+	{ '<leader>s', group = 'Session' },
 
 	-- ── g: Go to / LSP ────────────────────────────────────────────
 	-- LSP（keymaps.lua で上書き済みのものに説明を補足）
